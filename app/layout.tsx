@@ -7,8 +7,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'VirtualFit - Try On Clothes, Glasses & More in AR',
+  description: 'Experience clothes, glasses, hats, jewelry, and watches in augmented reality. Try before you buy!',
   generator: 'v0.app',
   icons: {
     icon: [

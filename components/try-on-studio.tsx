@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { initModels, detectAll, getFeatureAnchor, type Detection } from '@/lib/ar-detection';
 import { Loader2, Camera, Download, Share2, Home } from 'lucide-react';
 import Link from 'next/link';
+import { ShareDialog } from './share-dialog';
 
 interface Product {
   id: string;
@@ -29,6 +30,7 @@ export default function TryOnStudio({ product, onCapture }: TryOnStudioProps) {
   const [error, setError] = useState<string | null>(null);
   const [isStreaming, setIsStreaming] = useState(false);
   const [detection, setDetection] = useState<Detection | null>(null);
+  const [shareOpen, setShareOpen] = useState(false);
   const animationFrameRef = useRef<number>();
 
   useEffect(() => {
@@ -233,7 +235,12 @@ export default function TryOnStudio({ product, onCapture }: TryOnStudioProps) {
           <Camera className="w-4 h-4 mr-2" />
           Capture
         </Button>
-        <Button variant="outline" size="lg" className="flex-1">
+        <Button 
+          variant="outline" 
+          onClick={() => setShareOpen(true)}
+          size="lg" 
+          className="flex-1"
+        >
           <Share2 className="w-4 h-4 mr-2" />
           Share
         </Button>
@@ -243,6 +250,14 @@ export default function TryOnStudio({ product, onCapture }: TryOnStudioProps) {
           </Link>
         </Button>
       </div>
+
+      {/* Share Dialog */}
+      <ShareDialog
+        open={shareOpen}
+        onOpenChange={setShareOpen}
+        productName={product.name}
+        productPrice={product.price}
+      />
     </div>
   );
 }
