@@ -6,7 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "type-check": "tsc --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:coverage-check": "jest --coverage --collectCoverageFrom='lib/**/*.ts' --coverageReporters=text-summary",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:all": "pnpm test && pnpm test:e2e"
   },
   "dependencies": {
     "@tensorflow-models/facemesh": "^0.0.5",
