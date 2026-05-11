@@ -1,12 +1,8 @@
-import { type NextRequest, NextResponse } from 'next/server'
+import { updateSession } from '@/lib/supabase/proxy'
+import { type NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
-  // Basic middleware - session management will be handled by Supabase client-side
-  return NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  })
+export async function middleware(request: NextRequest) {
+  return await updateSession(request)
 }
 
 export const config = {

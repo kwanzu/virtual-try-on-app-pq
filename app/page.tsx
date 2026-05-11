@@ -1,10 +1,15 @@
+import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sparkles, Eye, Heart, Share2 } from 'lucide-react';
+import { redirect } from 'next/navigation';
 
-export default function Home() {
-  // User authentication is managed client-side via Supabase auth
-  const user = null; // Will be fetched on client-side
+export default async function Home() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
