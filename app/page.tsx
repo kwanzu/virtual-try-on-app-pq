@@ -5,11 +5,17 @@ import { Sparkles, Eye, Heart, Share2 } from 'lucide-react';
 import { redirect } from 'next/navigation';
 
 export default async function Home() {
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user = null;
+  
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user: authUser },
+    } = await supabase.auth.getUser();
+    user = authUser;
+  } catch (error) {
+    console.error('[v0] Failed to get user:', error);
+  }
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
